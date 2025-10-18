@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arwa Ali - Computer Science Student & Researcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF5E1;
+            color: #36454F;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 245, 225, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #55828B;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #36454F;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #55828B;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #C5528B;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #36454F;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 4px solid #55828B;
+            box-shadow: 0 10px 30px rgba(85, 130, 139, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #36454F;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #55828B;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #55828B, #C5528B);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #55828B;
+            border: 2px solid #55828B;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(85, 130, 139, 0.3);
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(85, 130, 139, 0.1), rgba(197, 82, 139, 0.1));
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #36454F;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #55828B, #C5528B);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 50%;
+            padding-right: 2rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%;
+            margin-right: 0;
+            padding-left: 2rem;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -30px;
+            border-left-color: white;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -30px;
+            border-right-color: white;
+            transform: translateY(-50%);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #55828B;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            border: 4px solid #FFF5E1;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #36454F;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-org {
+            color: #55828B;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: #C5528B;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: linear-gradient(135deg, rgba(197, 82, 139, 0.1), rgba(85, 130, 139, 0.1));
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #36454F;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            color: #55828B;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #C5528B;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: linear-gradient(135deg, rgba(85, 130, 139, 0.1), rgba(197, 82, 139, 0.1));
+        }
+
+        .skills-container {
+            position: relative;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+        }
+
+        .skill-bubble {
+            position: absolute;
+            background: linear-gradient(135deg, #55828B, #C5528B);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: grab;
+            user-select: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-bubble:active {
+            cursor: grabbing;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 50px;
+                margin-right: 0;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -30px;
+                border-right-color: white;
+                border-left-color: transparent;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Arwa Ali</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section home">
+        <img src="https://via.placeholder.com/150" alt="Arwa Ali" class="profile-img">
+        <h1 class="name">Arwa Ali</h1>
+        <p class="subtitle">Computer Science Student & Researcher</p>
+        <div class="cta-buttons">
+            <a href="https://linkedin.com/in/arwa-a-cubed/" class="btn btn-primary" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Arwa-786" class="btn btn-secondary" target="_blank">GitHub</a>
+            <a href="#" class="btn btn-secondary">Resume</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-content fade-in">
+            <p>Hi, I'm Arwa Ali, a computer science student and researcher passionate about AI and software development. I love exploring the intersection of technology and innovation, always eager to learn new concepts and apply them to solve real-world problems.</p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="section-title fade-in">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">Research Assistant</h3>
+                    <p class="timeline-org">AI Research Lab</p>
+                    <p class="timeline-date">2023 - Present</p>
+                    <p class="timeline-desc">Conducting research on machine learning algorithms and their applications in computer vision. Working on projects involving deep learning and neural networks.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">Software Development Intern</h3>
+                    <p class="timeline-org">Tech Solutions Inc.</p>
+                    <p class="timeline-date">Summer 2023</p>
+                    <p class="timeline-desc">Developed web applications using modern frameworks and technologies. Collaborated with senior developers on feature implementation and code optimization.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">Teaching Assistant</h3>
+                    <p class="timeline-org">Computer Science Department</p>
+                    <p class="timeline-date">2022 - 2023</p>
+                    <p class="timeline-desc">Assisted in teaching programming fundamentals and data structures. Helped students with debugging and understanding complex algorithms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <h2 class="section-title fade-in">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <h3 class="project-title">AI Chat Assistant</h3>
+                <p class="project-desc">Developed an intelligent chatbot using natural language processing and machine learning techniques to provide automated customer support.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card fade-in">
+                <h3 class="project-title">E-Commerce Platform</h3>
+                <p class="project-desc">Built a full-stack e-commerce application with React frontend and Node.js backend, featuring user authentication and payment processing.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card fade-in">
+                <h3 class="project-title">Data Visualization Tool</h3>
+                <p class="project-desc">Created an interactive dashboard for visualizing complex datasets using D3.js and modern web technologies.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card fade-in">
+                <h3 class="project-title">Mobile App Development</h3>
+                <p class="project-desc">Designed and developed a cross-platform mobile application using React Native with real-time data synchronization.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card fade-in">
+                <h3 class="project-title">Machine Learning Model</h3>
+                <p class="project-desc">Implemented a deep learning model for image classification using TensorFlow and achieved 95% accuracy on the test dataset.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <h2 class="section-title fade-in">Skills</h2>
+        <div class="skills-container" id="skills-container">
+            <!-- Skills will be dynamically added here -->
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Matter.js Physics Engine for Skills
+        const Engine = Matter.Engine;
+        const Render = Matter.Render;
+        const World = Matter.World;
+        const Bodies = Matter.Bodies;
+        const Mouse = Matter.Mouse;
+        const MouseConstraint = Matter.MouseConstraint;
+
+        // Initialize physics engine
+        const engine = Engine.create();
+        const world = engine.world;
+        const render = Render.create({
+            element: document.getElementById('skills-container'),
+            engine: engine,
+            options: {
+                width: document.getElementById('skills-container').offsetWidth,
+                height: 500,
+                wireframes: false,
+                background: '#FFF5E1',
+                showAngleIndicator: false,
+                showVelocity: false
+            }
+        });
+
+        // Skills data
+        const skills = [
+            'C', 'C++', 'Python', 'Java', 'JavaScript', 
+            'HTML/CSS', 'Swift', 'C#', 'React', 'Node.js', 
+            'Unity', 'OpenCV', 'FastAPI', 'Hugging Face'
+        ];
+
+        // Create skill bubbles
+        const skillBodies = [];
+        skills.forEach((skill, index) => {
+            const x = Math.random() * (render.canvas.width - 100) + 50;
+            const y = Math.random() * 100 + 50;
+            const radius = 30 + Math.random() * 20;
+            
+            const skillBody = Bodies.circle(x, y, radius, {
+                render: {
+                    fillStyle: `hsl(${200 + index * 20}, 70%, 60%)`,
+                    strokeStyle: '#55828B',
+                    lineWidth: 2
+                },
+                restitution: 0.8,
+                friction: 0.1,
+                frictionAir: 0.01
+            });
+
+            // Add text to the body
+            skillBody.skillName = skill;
+            skillBodies.push(skillBody);
+            World.add(world, skillBody);
+        });
+
+        // Create boundaries
+        const boundaries = [
+            Bodies.rectangle(render.canvas.width / 2, render.canvas.height, render.canvas.width, 20, { 
+                isStatic: true,
+                render: { fillStyle: '#55828B' }
+            }),
+            Bodies.rectangle(0, render.canvas.height / 2, 20, render.canvas.height, { 
+                isStatic: true,
+                render: { fillStyle: '#55828B' }
+            }),
+            Bodies.rectangle(render.canvas.width, render.canvas.height / 2, 20, render.canvas.height, { 
+                isStatic: true,
+                render: { fillStyle: '#55828B' }
+            })
+        ];
+
+        World.add(world, boundaries);
+
+        // Mouse constraint for dragging
+        const mouse = Mouse.create(render.canvas);
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+        World.add(world, mouseConstraint);
+
+        // Custom render function to draw skill names
+        const originalRender = render.render;
+        render.render = function() {
+            originalRender.call(this);
+            
+            const ctx = this.canvas.getContext('2d');
+            ctx.save();
+            ctx.font = '12px Poppins';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            skillBodies.forEach(body => {
+                if (body.skillName) {
+                    ctx.fillText(body.skillName, body.position.x, body.position.y);
+                }
+            });
+            ctx.restore();
+        };
+
+        // Run the engine
+        Engine.run(engine);
+        Render.run(render);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            render.canvas.width = document.getElementById('skills-container').offsetWidth;
+            render.canvas.height = 500;
+            render.options.width = render.canvas.width;
+            render.options.height = render.canvas.height;
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
