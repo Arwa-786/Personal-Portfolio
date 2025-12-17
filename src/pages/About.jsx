@@ -92,16 +92,19 @@ export const About = () => {
 
             {/* Story Section */}
             <div className="mb-12">
-              <h3 className="text-2xl font-bold text-[#36454F] mb-6">My Journey</h3>
+              <h3 className="text-2xl font-bold text-[#36454F] mb-6">Who am I?</h3>
               <div className="text-[#36454F] leading-relaxed space-y-4 text-lg">
                 <p>
-                  As a Computer Science student at UCF, I'm driven by a fascination with the intersection of Artificial Intelligence and human-computer interaction. My goal isn't just to write code, but to build intelligent systems that are intuitive, impactful, and solve real-world challenges.
+                  I am a student at the University of Central Florida, pursuing a Bachelor of Science in Computer Science with a minor in Mathematics. I have been coding since I was 11. I never said, "Woah! CS is my true passion.", because I love learning and I liked every subject I learnt(I still do). The reason why I chose CS: I like how easy Maths gets to me and I love CS more when Maths gets involved. In CS you can work with other fields, so in that way if you are interested in Biology and CS, then voila! You can integrate both of them and work on Bioinformatics. Same goes for other fields too.
                 </p>
                 <p>
-                  This passion leads me to explore multiple frontiers simultaneously. In the lab, I'm architecting the brains of conversational AI agents for Virtual Reality. At hackathons, I'm building award-winning applications for emerging platforms like the Apple Vision Pro. This balance of methodical research and rapid, creative development is where I thrive.
+                  I love how I struggle with everything in the beginning and fail a lot (failure loves me). Yes, it is frustrating, but trust me that is the fun part. It is the failure process that makes it fun and I agree that I have learnt more things by getting stuck and failing than succeeding at it the first time.
                 </p>
                 <p>
-                  Beyond the compiler, my world revolves around community and mentorship. Whether I'm guiding dozens of students through tough data structures concepts as an SI Leader or engaging in campus life, I believe in the power of collaboration and lifting others up. For me, technology is a tool, but community is the purpose. (Go Knights!)
+                 Most of my week days are spent on campus (8am to 10pm). Not joking! I have classes and work and other extracurriuclar activities that I do to avoid boredom. I enjoy these side quests and the idea to just stumble upon new ideas, events or activities excites me. Meet people and talk with them. I am an introvert, but I still meet with people because the best learning happens when you interact with others and get to know their life and point of views even when it is diffrent than yours.
+                </p>
+                 <p>
+                 Currently, I am interested in Tech (anything new happens, I watch videos about it and try it, if it is free to use). I am a person who hates boredom so much that I like to keep my weekends busy too. Whenever there is a weekend, I decide to do hackathons, go to conferences because I like to keep moving and learning (no stagnant phase for me).
                 </p>
               </div>
             </div>
@@ -144,7 +147,7 @@ export const About = () => {
                 <div>• Enjoy taking photos and drawing flowers</div>
                 <div>• I'm a huge animal lover, especially cats</div>
                 <div>• I can't swallow pills to save my life</div>
-                <div>• My prized possession is a working miniature Rubik's cube</div>
+                <div>• My prized possession is a mini Rubik's cube</div>
               </div>
             </div>
           </div>

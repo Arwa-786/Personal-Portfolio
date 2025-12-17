@@ -67,9 +67,23 @@ const CherryBlossomSketch = () => {
 export const Projects = () => {
   const projects = [
     {
+      title: "WalkFlow (USF Hackjam 2025)",
+      description: "A routing engine that prioritizes pedestrian comfort and safety over distance. It analyzes shade, canopy coverage, and roadway separation to help students navigate Florida heat via the healthiest possible paths.",
+      tech: ["HTML", "CSS", "JavaScript", "Node.js", "API", "Google Maps API", "Gemini", ],
+      github: "https://github.com/Arwa-786/WalkFlow",
+      imageUrl: "./walk.png"
+    },
+    {
+      title: "ImaginationLand (SharkBytes Hackathon 2025 - Best Use of ElevenLabs)",
+      description: "An AI-driven platform where readers co-author dynamic, branching storybooks in real time. By selecting genres, themes, and narrative choices, users shape a living world that evolves based on their decisions.",
+      tech: ["HTML", "CSS", "TypeScript", "Node.js", "vite", "CloudFlare", "ElevenLabs", "Gemini API"],
+      github: "https://github.com/Arwa-786/ai-story-engine/",
+      imageUrl: "./imagination.png"
+    },
+    {
       title: "VR Conversational AI Agent",
-      description: "A multimodal AI agent in Unity for real-time, human-like dialogue in VR. Features a low-latency pipeline (ASR→LLM→TTS) and gesture recognition with over 90% accuracy.",
-      tech: ["Unity", "Python", "C#", "LLMs", "VLMs", "HuggingFace"],
+      description: "A multimodal AI agent in Unity for real-time, human-like dialogue in VR. Features a low-latency pipeline (ASR→LLM→TTS) and gesture recognition.",
+      tech: ["Unity", "Python", "C#", "LLMs", "VLMs", "HuggingFace", "LM Studio"],
       github: "https://github.com/maslychm/avatar_llm_unity",
       imageUrl: "./vr.png"
     },
@@ -88,7 +102,7 @@ export const Projects = () => {
       imageUrl: "./visu.png"
     },
     {
-      title: "VISION (KnightHacks 2024)",
+      title: "VISION (KnightHacks 2024 - Honorable Mention)",
       description: "Honorable Mention winner. A hands-free UI engineered with real-time eye-tracking via OpenCV and over 10 voice commands for accessible control.",
       tech: ["Python", "OpenCV", "Pygame", "Speech Recognition"],
       github: "https://github.com/pranavsaigandikota/Vision",
@@ -100,7 +114,7 @@ export const Projects = () => {
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/Arwa-786/Pokemon-Memory-Card-Game",
       imageUrl: "./poke.png"
-    }
+    },
   ];
 
   return (

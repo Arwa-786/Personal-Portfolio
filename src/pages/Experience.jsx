@@ -213,22 +213,22 @@ const SkillDrop = ({ skills }) => {
 export const Experience = () => {
   const experiences = [
     {
-      title: "Undergraduate Research Assistant",
+      title: "Undergraduate Research Assistant - Knight Research Scholars Program",
       company: "ISUE Lab, University of Central Florida",
-      duration: "May 2025 – Present",
+      duration: "May 2025 – August 2025",
       description: "Architecting a Python backend with 5 modules (Unity, ASR, LLM, VLM, TTS) for real-time multimodal interactions in VR, improving VLM accuracy by benchmarking 30+ models.",
     },
-    {
+    /*{
         title: "Undergraduate Research Assistant",
         company: "Research with Prof. Jongouk Choi, UCF",
         duration: "June 2025 – Present",
         description: "Investigating the fault-tolerance of LLMs on embedded systems (NVIDIA Jetson) by deploying models and simulating security attacks like bit-flips.",
-    },
+    },*/
     {
-      title: "Supplemental Instruction Leader",
+      title: "Supplemental Instruction Leader - Computer Science 1",
       company: "University of Central Florida",
       duration: "Aug 2024 – Present",
-      description: "Mentoring peers in advanced C (DSA), authoring all quiz and exam materials, and leading weekly review sessions for crowds of over 70 students.",
+      description: "Mentoring peers in advanced C (DSA), authoring all quiz and exam materials, and leading weekly sessions. I have got lots of attendance, but the largest attendance I ever got was approximately 100 students for a review session and my plan is to beat that so more students can benefit from it.",
     },
   ];
 
